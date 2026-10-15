@@ -1,0 +1,35 @@
+plugins {
+    id 'io.micronaut.application' version '4.4.0'
+}
+
+version = '1.0.0'
+group = 'com.octiq.test'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    annotationProcessor 'io.micronaut:micronaut-http-validation'
+    implementation 'io.micronaut:micronaut-http-server-netty'
+    runtimeOnly 'ch.qos.logback:logback-classic'
+    runtimeOnly 'org.yaml:snakeyaml'
+}
+
+application {
+    mainClass = 'com.octiq.test.micronaut.Application'
+}
+
+java {
+    sourceCompatibility = JavaVersion.toVersion('17')
+    targetCompatibility = JavaVersion.toVersion('17')
+}
+
+micronaut {
+    runtime('netty')
+    testRuntime('junit5')
+    processing {
+        incremental(true)
+        annotations('com.octiq.test.micronaut.*')
+    }
+}
